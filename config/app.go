@@ -1,7 +1,9 @@
 // Package config 站点配置信息
 package config
 
-import "gohub/pkg/config"
+import (
+	"gohub/pkg/config"
+)
 
 func init() {
 	config.Add("app", func() map[string]interface{} {
