@@ -6,6 +6,7 @@ import (
 	"gohub/bootstrap"
 	btsConfig "gohub/config"
 	"gohub/pkg/config"
+	"gohub/pkg/sms"
 
 	"github.com/gin-gonic/gin"
 )
