@@ -29,7 +29,10 @@ func RegisterAPIRoutes(r *gin.Engine) {
 			authGroup.POST("/verify-codes/captcha",vcc.ShowCaptcha)
 			authGroup.POST("/verify-codes/email", vcc.SendUsingEmail)
 
-			// 发送验证码
+			lgc := new(auth.LoginController)
+			// 使用手机号，短信验证码进行登陆
+			authGroup.POST("/login/using-phone", lgc.LoginByPhone)
+
 		}
 
 		// 注册一个路由
