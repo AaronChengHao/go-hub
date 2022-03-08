@@ -39,3 +39,8 @@ func Get(idstr string) (userModel User) {
 	database.DB.Where("id", idstr).First(&userModel)
 	return
 }
+
+func (userModel *User) Save() (rowsAffected int64) {
+	result := database.DB.Save(&userModel)
+	return result.RowsAffected
+}
