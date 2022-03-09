@@ -1,7 +1,6 @@
 package middlewares
 
 import (
-	"fmt"
 	"gohub/pkg/app"
 	"gohub/pkg/limiter"
 	"gohub/pkg/logger"
