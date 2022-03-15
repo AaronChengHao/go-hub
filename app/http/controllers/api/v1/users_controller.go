@@ -1,11 +1,11 @@
 package v1
 
 import (
+    "github.com/gin-gonic/gin"
+    "gohub/app/models/user"
     "gohub/app/requests"
     "gohub/pkg/auth"
     "gohub/pkg/response"
-    "gohub/app/models/user"
-    "github.com/gin-gonic/gin"
 )
 
 type UsersController struct {
@@ -29,4 +29,24 @@ func (ctrl *UsersController) Index(c *gin.Context) {
         "data":  data,
         "pager": pager,
     })
+}
+
+
+func (ctrl *UsersController) UpdateProfile(c *gin.Context) {
+
+    request := requests.UserUpdateProfileRequest{}
+    if ok := requests.Validate(c, &request, requests.UserUpdateProfile); !ok {
+        return
+    }
+
+    currentUser := auth.CurrentUser(c)
+    currentUser.Name = request.Name
+    currentUser.City = request.City
+    currentUser.Introduction = request.Introduction
+    rowsAffected := currentUser.Save()
+    if rowsAffected > 0 {
+        response.Data(c, currentUser)
+    } else {
+        response.Abort500(c, "更新失败，请稍后尝试~")
+    }
 }
